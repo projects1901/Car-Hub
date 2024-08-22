@@ -1,0 +1,5 @@
+CREATE TABLE UserRoleMap (
+    UserId INT FOREIGN KEY REFERENCES Users(Id),
+    RoleId INT FOREIGN KEY REFERENCES Roles(Id),
+    PRIMARY KEY (UserId, RoleId)
+);

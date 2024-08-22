@@ -1,0 +1,116 @@
+<app-navbar></app-navbar>
+
+<div class="container mt-5">
+  <h2 class="text-center">Add Car Model</h2>
+  <form (ngSubmit)="onSubmit()" #carModelForm="ngForm" class="mx-auto" style="max-width: 600px;">
+
+    <div class="mb-3 row">
+      <label for="brand" class="col-sm-4 col-form-label">Brand</label>
+      <div class="col-sm-8">
+        <select class="form-select" id="brand" [(ngModel)]="carModel.brand" name="brand" required>
+          <option value="" selected disabled>Select Brand</option>
+          <ng-container *ngFor="let brand of CarBrand | keyvalue">
+            <option *ngIf="brand.value !== ''" [value]="brand.value">{{ brand.value }}</option>
+          </ng-container>
+        </select>
+
+      </div>
+    </div>
+
+    <div class="mb-3 row">
+      <label for="class" class="col-sm-4 col-form-label">Class</label>
+      <div class="col-sm-8">
+        <select class="form-select" id="class" [(ngModel)]="carModel.class" name="class" required>
+          <option value="" selected>Select Class</option>
+          <ng-container *ngFor="let carClass of CarClass | keyvalue">
+            <option *ngIf="carClass.value !== ''" [value]="carClass.value">{{ carClass.value }}</option>
+          </ng-container>
+        </select>
+      </div>
+    </div>
+
+    <div class="mb-3 row">
+      <label for="modelName" class="col-sm-4 col-form-label">Model Name</label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control" id="modelName" [(ngModel)]="carModel.modelName" name="modelName" required>
+      </div>
+    </div>
+
+    <div class="mb-3 row">
+      <label for="modelCode" class="col-sm-4 col-form-label">Model Code</label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control" id="modelCode" [(ngModel)]="carModel.modelCode" name="modelCode" #modelCode="ngModel" required pattern="^[a-zA-Z0-9]{10}$">
+        <div class="form-text text-danger" *ngIf="modelCode.invalid && (modelCode.dirty || modelCode.touched)">Must be 10 alphanumeric characters.</div>
+      </div>
+    </div>
+
+    <div class="mb-3 row">
+      <label for="description" class="col-sm-4 col-form-label">Description</label>
+      <div class="col-sm-8">
+        <textarea class="form-control" id="description" [(ngModel)]="carModel.description" name="description" required></textarea>
+
+      </div>
+    </div>
+
+    <div class="mb-3 row">
+      <label for="features" class="col-sm-4 col-form-label">Features</label>
+      <div class="col-sm-8">
+        <textarea class="form-control" id="features" [(ngModel)]="carModel.features" name="features" required></textarea>
+
+      </div>
+    </div>
+
+    <div class="mb-3 row">
+      <label for="price" class="col-sm-4 col-form-label">Price</label>
+      <div class="col-sm-8">
+        <input type="number" class="form-control" id="price" [(ngModel)]="carModel.price" name="price" required>
+      </div>
+    </div>
+
+    <div class="mb-3 row">
+      <label for="dateOfManufacturing" class="col-sm-4 col-form-label">Date of Manufacturing</label>
+      <div class="col-sm-8">
+        <input type="date"
+               class="form-control"
+               id="dateOfManufacturing"
+               [(ngModel)]="carModel.dateOfManufacturing"
+               name="dateOfManufacturing"
+               #dateOfManufacturing="ngModel"
+               required />
+        <div class="form-text text-danger"
+             *ngIf="dateOfManufacturing.invalid && (dateOfManufacturing.dirty || dateOfManufacturing.touched)">
+          This field is required.
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <div class="mb-3 row">
+      <label for="active" class="col-sm-4 col-form-label">Active</label>
+      <div class="col-sm-8">
+        <div class="form-check form-switch">
+          <input type="checkbox" class="form-check-input" id="active" [(ngModel)]="carModel.active" name="active">
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-3 row">
+      <label for="sortOrder" class="col-sm-4 col-form-label">Sort Order</label>
+      <div class="col-sm-8">
+        <input type="number" class="form-control" id="sortOrder" [(ngModel)]="carModel.sortOrder" name="sortOrder" required>
+      </div>
+    </div>
+
+    <div class="mb-3 row">
+      <label for="images" class="col-sm-4 col-form-label">Images</label>
+      <div class="col-sm-8">
+        <input type="file" class="form-control" id="images" (change)="onFileChange($event)" accept=".jpg, .jpeg, .png" multiple>
+        <div class="form-text">Max size 5MB for each image.</div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="!carModelForm.valid">Submit</button>
+  </form>
+</div>

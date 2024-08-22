@@ -1,0 +1,40 @@
+<app-navbar></app-navbar>
+
+<div class="container mt-5">
+  <!-- Filters -->
+  <div class="bg-light p-4 rounded">
+    <h3 class="mb-4">Filters</h3>
+    <div class="row mb-4">
+      <div class="col-md-3">
+        <label for="modelName">Model Name</label>
+        <input type="text" id="modelName" class="form-control" placeholder="modelName" [(ngModel)]="modelName">
+      </div>
+      <div class="col-md-3">
+        <label for="modelCode">Model Code</label>
+        <input type="text" id="modelCode" class="form-control" placeholder="modelCode" [(ngModel)]="modelCode">
+
+      </div>
+      
+      <div class="col-md-3 d-flex align-items-end">
+        <button class="btn btn-primary w-100" (click)="filterListings()">Search</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <h3 class="mb-4">All Listings</h3>
+    <div class="col-md-4 mb-4" *ngFor="let item of filteredListings">
+      <div class="card h-100 d-flex flex-column">
+        <img [src]="item.imageUrls"  class="card-img-top h-50" alt="{{ item.brand }}">
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title"><b>Model Name: </b>{{ item.modelName }}</h5>
+          <i><b>Model Brand: </b>{{item.brand}}</i>
+          <i><b>Model Class: </b>{{item.class}}</i>
+          <i><b>Model Code: </b>{{item.modelCode}}</i>
+          <p class="card-text flex-grow-1"><b>Description: </b>{{ item.description }}</p>
+          <b><b>Price: </b>{{item.price}}</b>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

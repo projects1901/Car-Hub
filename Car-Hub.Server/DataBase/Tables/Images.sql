@@ -1,0 +1,5 @@
+CREATE TABLE Images (
+    Id INT PRIMARY KEY IDENTITY,
+    CarModelId INT FOREIGN KEY REFERENCES CarModels(CarModelId),
+    ImagePath NVARCHAR(MAX) NOT NULL
+);

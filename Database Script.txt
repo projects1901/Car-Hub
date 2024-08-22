@@ -1,0 +1,42 @@
+-- Create the below tables in the DB and modify the connection sting for that DB in appsettings.json
+
+CREATE TABLE Users (
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    FullName NVARCHAR(100) NOT NULL,
+    Username NVARCHAR(50) NOT NULL UNIQUE,
+    PasswordHash NVARCHAR(256) NOT NULL
+);
+
+CREATE TABLE Roles (
+    Id INT PRIMARY KEY IDENTITY,
+    RoleName NVARCHAR(50) NOT NULL UNIQUE
+);
+
+CREATE TABLE UserRoleMap (
+    UserId INT FOREIGN KEY REFERENCES Users(Id),
+    RoleId INT FOREIGN KEY REFERENCES Roles(Id),
+    PRIMARY KEY (UserId, RoleId)
+);
+
+CREATE TABLE Images (
+    Id INT PRIMARY KEY IDENTITY,
+    CarModelId INT FOREIGN KEY REFERENCES CarModels(CarModelId),
+    ImagePath NVARCHAR(MAX) NOT NULL
+);
+
+CREATE TABLE CarModels (
+    CarModelId INT IDENTITY(1,1) PRIMARY KEY,          -- Primary key with auto-increment
+    Brand NVARCHAR(50) NOT NULL,                      -- Brand (Audi, Jaguar, etc.)
+    Class NVARCHAR(50) NOT NULL,                      -- Class (A-Class, B-Class, etc.)
+    ModelName NVARCHAR(100) NOT NULL,                 -- Model Name
+    ModelCode NVARCHAR(10) NOT NULL,                  -- Model Code (Alphanumeric, 10 characters)
+    Description NVARCHAR(MAX) NOT NULL,               -- Description (FCK Editor)
+    Features NVARCHAR(MAX) NOT NULL,                  -- Features (FCK Editor)
+    Price DECIMAL(18, 2) NOT NULL,                    -- Price
+    DateOfManufacturing DATETIME NOT NULL,            -- Date of Manufacturing
+    IsActive BIT NOT NULL,                            -- Active status (Boolean)
+    SortOrder INT NOT NULL,                           -- Sort Order
+    ModelImage VARBINARY(MAX),                        -- Model Image (Multiple images can be handled via a related table)
+    CreatedAt DATETIME DEFAULT GETDATE(),             -- Record creation timestamp
+    UpdatedAt DATETIME DEFAULT GETDATE()              -- Record update timestamp
+);

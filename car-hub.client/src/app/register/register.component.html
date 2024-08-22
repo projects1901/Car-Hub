@@ -1,0 +1,26 @@
+<div class="container mt-5">
+  <h2 class="text-center">Register</h2>
+  <form (ngSubmit)="register(registerForm)" #registerForm="ngForm" class="mx-auto" style="max-width: 400px;">
+
+    <div class="mb-3">
+      <label for="fullName" class="form-label">Full Name</label>
+      <input type="text" class="form-control" id="fullName" [(ngModel)]="fullName" name="fullName" required>
+      <div *ngIf="registerForm.submitted && !fullName" class="text-danger">Full Name is required.</div>
+    </div>
+
+    <div class="mb-3">
+      <label for="username" class="form-label">Username</label>
+      <input type="text" class="form-control" id="username" [(ngModel)]="username" name="username" required>
+      <div *ngIf="registerForm.submitted && !username" class="text-danger">Username is required.</div>
+    </div>
+
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input type="password" class="form-control" id="password" [(ngModel)]="password" name="password" required>
+      <div *ngIf="registerForm.submitted && !password" class="text-danger">Password is required.</div>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="!registerForm.valid">Register</button>&nbsp;
+    <button type="button" class="btn btn-secondary" (click)="onLogin()">Login</button>
+  </form>
+</div>

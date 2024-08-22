@@ -1,0 +1,20 @@
+<div class="container mt-5">
+  <h2 class="text-center">Login</h2>
+  <form (ngSubmit)="login(loginForm)" #loginForm="ngForm" class="mx-auto" style="max-width: 400px;">
+
+    <div class="mb-3">
+      <label for="username" class="form-label">Username</label>
+      <input type="text" class="form-control" id="username" [(ngModel)]="username" name="username" required>
+      <div *ngIf="loginForm.submitted && !username" class="text-danger">Username is required.</div>
+    </div>
+
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input type="password" class="form-control" id="password" [(ngModel)]="password" name="password" required>
+      <div *ngIf="loginForm.submitted && !password" class="text-danger">Password is required.</div>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid">Login</button>&nbsp;
+    <button type="button" class="btn btn-secondary" (click)="onRegister()">Register</button>
+  </form>
+</div>
